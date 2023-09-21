@@ -63,7 +63,6 @@ const useForYouFeedStore = create<ForYouFeedState>()((set, get) => ({
    * Fetches more questions for the For You Feed.
    */
   fetchMore: async () => {
-    console.log("fetching more");
     set({ loading: true });
     const data = await fetchNQuestionsInParallel(5, true);
     if (data.length > 0) {
@@ -112,16 +111,13 @@ const useForYouFeedStore = create<ForYouFeedState>()((set, get) => ({
    */
   getSetAnswerForQuestion: async (questionId: number) => {
     // check if we already have the answer
-    console.log("prefetching answer");
     const progress = get().progress;
     if (progress[questionId]?.correctOptionId) {
-      console.log("answer already in cache");
       return;
     }
 
     // we do not have the answer, fetch it from the api
     const response = await getAnswer(questionId);
-    console.log({ response });
     if (response.data && response.data.correct_options.length == 1) {
       // set the correct answer as a combination of the question id and the option id
       const correctOptionId = concatQuestionAndOption(

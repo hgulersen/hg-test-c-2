@@ -13,7 +13,6 @@ const ForYouFeed = () => {
       onViewableItemsChanged: (info: any) => {
         if (info?.viewableItems?.length > 0) {
           const currentQuestionId = info?.viewableItems[0]?.item?.id;
-          console.log({ currentQuestionId });
           setCurrentQuestionId(currentQuestionId);
         }
       },
